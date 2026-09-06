@@ -10,8 +10,14 @@ import "./interfaces/IOpenTradeRouter.sol";
 
 contract TokenCow is ERC721, ERC721Burnable {
     uint256 private _nextTokenId;
+    IOpenTradeRouter openTradeRouter;
 
-    constructor() ERC721("TokenCow", "TCOW") {}
+    constructor(address OTRouterAddress) ERC721("TokenCow", "TCOW") {
+        openTradeRouter = IOpenTradeRouter(OTRouterAddress);
+        address[] memory test;
+        test[1] = 0x7b535379bBAfD9cD12b35D91aDdAbF617Df902B2;
+        uint256[] memory amounts = openTradeRouter.swapExactTokensForTokens(10, 10, test, 0x7b535379bBAfD9cD12b35D91aDdAbF617Df902B2, 12313);
+    }
     
 
     function safeMint(address to) public returns (uint256)
